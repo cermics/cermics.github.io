@@ -1,0 +1,27 @@
+
+{%- assign m_team = staff_member.team | strip -%}
+{%- assign m_position = staff_member.position | strip -%}
+{%- assign m_function = staff_member.function | strip -%}
+{% if m_team contains team %}{% if m_position contains position %}{% if m_function contains function %}
+<div class="staff-card" id="{{ staff_member.sur | downcase }}" data-team="{{ m_team | downcase }}" data-position="{{ m_position | downcase }}" data-function="{{ m_function | downcase }}" data-name="{{ staff_member.name }} {{ staff_member.sur }}" data-place="{{ staff_member.place }}">
+<div class="flex-container">
+  {% assign staff_member_image =  '/assets/staff_images/' | append: staff_member.image |  relative_url %}
+    <img src="{{ staff_member_image  }}" alt="Description de l'image" class="side-image">
+    <div class="text-content">
+      <a href="{{ staff_member.homepage }}" > {{ staff_member.name }} {{ staff_member.sur }}</a>
+      {% if m_function != "member" %}, <strong>{{ m_function }}</strong> {% endif %}
+      <br>
+		{% if m_position %}{{ m_position  }}, {% endif %}
+      {% if m_team == "OPTIM" %}<a href="{% link optimization.md %}">{{ m_team }}</a>,{% endif %}
+      {% if m_team == "PROBA" %}<a href="{% link applied-probability.md %}">{{ m_team }}</a>,{% endif %}
+      {% if m_team == "MAS" %}<a href="{% link mas.md %}">{{ m_team }}</a>,{% endif %}
+      {{ staff_member.place }}
+      <a href="mailto:{{ staff_member.mail }}" title="Email me">
+	<img src="{{ '/assets/images/email.png' | relative_url }}" width="20" />
+      </a>	
+      {% if staff_member.tel %}<a class="social-btn" href="tel:{{ staff_member.tel }}" target="_blank" rel="noopener noreferrer">
+	<i class="fa fa-fw fa-phone"></i></a>{% endif %}
+    </div>
+</div>
+</div>
+{% endif %}{% endif %}{% endif %}
