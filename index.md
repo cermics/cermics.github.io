@@ -1,6 +1,4 @@
 ---
-layout: home
-cover-img: /assets/images-cermics/image14.jpg
 permalink: /index.html/
 redirect_to: https://cermics.github.io/cermics
 ---
